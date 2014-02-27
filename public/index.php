@@ -1,6 +1,10 @@
 <?php
 require '../vendor/autoload.php';
 
+spl_autoload_register(function ($classname) {
+    require "../lib/" . str_replace('\\', DIRECTORY_SEPARATOR, $classname) . ".php";
+});
+
 // Prepare app
 $app = new \Slim\Slim(array(
     'templates.path' => '../templates',
@@ -30,6 +34,17 @@ $app->get('/', function () use ($app) {
     $app->log->info("Slim-Skeleton '/' route");
     // Render index view
     $app->render('index.html');
+});
+
+$app->get('/hello', function() use ($app) {
+    $app->render('hello.html', array("greeting" => "Hi there"));
+});
+
+$app->post('/hello', function() use ($app) {
+    $user = new \MyProject\Person($app->request->post('name'));
+    $app->render('hello.html', 
+        array("greeting" => "Hi there",
+        "user" => $user));
 });
 
 // Run app
