@@ -41,7 +41,12 @@ $app->get('/hello', function() use ($app) {
 });
 
 $app->post('/hello', function() use ($app) {
-    $user = new \MyProject\Person($app->request->post('name'));
+    $name = $app->request->post('name');
+    if($name) {
+        $user = new \MyProject\User($name);
+    } else {
+        $user = new \MyProject\Guest();
+    }
     $app->render('hello.html', 
         array("greeting" => "Hi there",
         "user" => $user));

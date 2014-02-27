@@ -2,7 +2,7 @@
 
 namespace MyProject;
 
-class Person
+abstract class Person
 {
     protected $name;
 
