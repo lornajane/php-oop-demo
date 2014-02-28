@@ -52,5 +52,11 @@ $app->post('/hello', function() use ($app) {
         "user" => $user));
 });
 
+$app->get('/singleton', function() {
+    $app = \Slim\Slim::getInstance();
+    var_dump($app);
+});
+
+
 // Run app
 $app->run();
