@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="myproject" default="build" basedir=".">
+  <target name="prepare" description="Create build directory">
+    <mkdir dir="build" />
+  </target>
+
+  <target name="clean" description="Remove build directory, if present">
+    <delete dir="build" />
+  </target>
+
+  <target name="build" description="Default target" depends="clean, prepare" />
+</project>
